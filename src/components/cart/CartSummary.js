@@ -1,6 +1,7 @@
 import alertify from "alertifyjs";
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import {
 	UncontrolledDropdown,
 	DropdownToggle,
@@ -50,7 +51,9 @@ class CartSummary extends Component {
 					))}
 
 					<DropdownItem divider />
-					<DropdownItem>Reset</DropdownItem>
+					<DropdownItem>
+						<Link to={"/cart"}>Go To Cart</Link>
+					</DropdownItem>
 				</DropdownMenu>
 			</UncontrolledDropdown>
 		);
