@@ -15,6 +15,7 @@ function AddOrUpdateProduct({
 }) {
 	//bu syntax product stateini set product fonksiyon ile set edebilirim demek
 	const [product, setProduct] = useState({ ...props.product });
+	const [errors, setErrors] = useState({});
 	useEffect(() => {
 		if (categories.length === 0) {
 			getCategories();
@@ -36,6 +37,22 @@ function AddOrUpdateProduct({
 			//category id değilse value oldugu gibi bas
 			[name]: name === "categoryId" ? parseInt(value, 10) : value,
 		}));
+
+		validate(name, value);
+
+		function validate(name, value) {
+			if (name === "productName" && value === "") {
+				setErrors((previousErrors) => ({
+					...previousErrors,
+					productName: "Need a product name!",
+				}));
+			} else {
+				setErrors((previousErrors) => ({
+					...previousErrors,
+					productName: "",
+				}));
+			}
+		}
 	}
 	function handleSave(e) {
 		e.preventDefault();
@@ -51,6 +68,7 @@ function AddOrUpdateProduct({
 			categories={categories}
 			onChange={handleChange}
 			onSave={handleSave}
+			errors={errors}
 		></ProductDetail>
 	);
 }

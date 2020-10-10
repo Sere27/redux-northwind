@@ -8,6 +8,7 @@ import {
 	NavItem,
 	NavLink,
 } from "reactstrap";
+import { Link } from "react-router-dom";
 import CartSummary from "../cart/CartSummary";
 
 const Navi = (props) => {
@@ -18,18 +19,18 @@ const Navi = (props) => {
 	return (
 		<div>
 			<Navbar color="light" light expand="md">
-				<NavbarBrand href="/">Northwind</NavbarBrand>
+				<NavbarBrand>
+					<Link to="/">Northwind</Link>
+				</NavbarBrand>
 				<NavbarToggler onClick={toggle} />
 				<Collapse isOpen={isOpen} navbar>
 					<Nav className="mr-auto" navbar>
 						<NavItem>
-							<NavLink href="/components/">Components</NavLink>
-						</NavItem>
-						<NavItem>
-							<NavLink href="https://github.com/reactstrap/reactstrap">
-								GitHub
+							<NavLink>
+								<Link to="/saveproduct">Save Product</Link>
 							</NavLink>
 						</NavItem>
+
 						<CartSummary></CartSummary>
 					</Nav>
 				</Collapse>
