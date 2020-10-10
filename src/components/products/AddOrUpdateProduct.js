@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getCategories } from "../../redux/actions/categoryActions";
 import { saveProduct } from "../../redux/actions/productActions";
+import ProductDetail from "./ProductDetails";
 
 function AddOrUpdateProduct({
 	products,
@@ -18,13 +19,13 @@ function AddOrUpdateProduct({
 		if (categories.length === 0) {
 			getCategories();
 		}
-		setProduct(...props.product);
+		setProduct({ ...props.product });
 		//use effect bir lifecycle a giriyor sonsuz bir döngü
 		// bunu engellemek için bir parametre ile bunu durdur diyoruz
 		//props.product izle dom a yerleştiği zaman bitir
 	}, [props.product]);
 
-	function handleChange(e) {
+	function handleChange(event) {
 		//event targetın yani textinputun name ve valuesunu atamış oluyoruz
 		const { name, value } = event.target;
 		setProduct((previousProduct) => ({
@@ -42,11 +43,16 @@ function AddOrUpdateProduct({
 			//history de daha önce geldiğimiz sayfalara yönlendirme yapmak için yöntem
 			history.push("/");
 		});
-   }
-   
-   return (
-      //******  burada artık ürün geliştirmeye yöneli textbox vs burada tasarlayacagım
-   )
+	}
+
+	return (
+		<ProductDetail
+			product={product}
+			categories={categories}
+			onChange={handleChange}
+			onSave={handleSave}
+		></ProductDetail>
+	);
 }
 
 export function getProductById(products, productId) {
@@ -62,13 +68,13 @@ function mapStateToProps(state, ownProps) {
 	const productId = ownProps.match.params.productId;
 	//state ki ürünler içerisinde bu ürünü bulmaya calısıyoruz
 	const product =
-		productId && state.productReducer.length > 0
-			? getProductById(state.productReducer, productId)
+		productId && state.productListReducer.length > 0
+			? getProductById(state.productListReducer, productId)
 			: {};
 	return {
 		product,
-		products: state.productReducer,
-		categories: state.categoryReducer,
+		products: state.productListReducer,
+		categories: state.categoryListReducer,
 	};
 }
 
