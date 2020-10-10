@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { getCategories } from "../../redux/actions/categoryActions";
 import { saveProduct } from "../../redux/actions/productActions";
-import ProductDetail from "./ProductDetails";
+import ProductDetail from "./ProductDetail";
 
 function AddOrUpdateProduct({
 	products,
@@ -56,7 +56,8 @@ function AddOrUpdateProduct({
 }
 
 export function getProductById(products, productId) {
-	let product = products.find((product) => product.id === productId) || null;
+	// eslint-disable-next-line eqeqeq
+	let product = products.find((product) => product.id == productId) || null;
 	return product;
 }
 

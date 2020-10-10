@@ -11,7 +11,7 @@ const SelectInput = ({
 }) => {
 	return (
 		<div className="form-group">
-			<label htmlFor={name}>{label}</label>
+			<label htmlFom={name}>{label}</label>
 			<select
 				name={name}
 				value={value}
@@ -21,7 +21,7 @@ const SelectInput = ({
 				<option value="">{defaultOption}</option>
 				{options.map((option) => {
 					return (
-						<option key={option.value} value={option.vale}>
+						<option key={option.value} value={option.value}>
 							{option.text}
 						</option>
 					);
@@ -31,3 +31,5 @@ const SelectInput = ({
 		</div>
 	);
 };
+
+export default SelectInput;
